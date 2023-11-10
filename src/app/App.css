@@ -1,9 +1,21 @@
 :root {
-    
+    --white: hsl(0, 0%, 100%);
+    --pink: hsl(327, 100%, 68%);
+    --sky: hsl(216, 57%, 85%);
+    --gray: hsl(0, 0%, 75%);
+    --slate: hsl(210, 13%, 50%);
+    --blue: hsl(217, 32%, 19%);
+    --black: hsl(0, 0%, 0%);
+}
+
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: slategray;
+    background-color: var(--gray);
 }
 
 
