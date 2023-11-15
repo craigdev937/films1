@@ -1,10 +1,30 @@
 import React from "react";
+import { MediaAPI } from "../global/MediaAPI";
 
 export const Actors = () => {
+    const { error, isLoading, data } = MediaAPI.useActQuery();
+
+    if (error) {
+        if ("status" in error) {
+            const errMSG = "error" in error ?
+                error.error : 
+                JSON.stringify(error.data);
+            return <h1>Error: {errMSG}</h1>
+        } else {
+            return <h1>Error: {error.message}</h1>
+        }
+    };
+
+    if (isLoading) return <h1>Loading...</h1>
+
     return (
         <React.Fragment>
             <h1>Actors</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias modi vero nobis enim laudantium delectus cupiditate reiciendis illum id fuga beatae pariatur quo similique ea, eligendi corrupti sint est consectetur?</p>
+            {data!.results.map((actor) => (
+                <section key={actor.id}>
+                    <h1>{actor.name}</h1>
+                </section>
+            ))}    
         </React.Fragment>
     );
 };
