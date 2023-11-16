@@ -1,10 +1,31 @@
 import React from "react";
+import { MediaAPI } from "../global/MediaAPI";
+import { FilmCard } from "../components/FilmCard";
 
 export const Films = () => {
+    const { error, isLoading, data } = MediaAPI.useFilmQuery();
+
+    if (error) {
+        if ("status" in error) {
+            const errMSG = "error" in error ?
+                error.error :
+                JSON.stringify(error.data);
+            return <h1>Error: {errMSG}</h1>
+        } else {
+            return <h1>Error: {error.message}</h1>
+        };
+    };
+
+    if (isLoading) return <h1>Loading...</h1>
+
     return (
         <React.Fragment>
             <h1>Films</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias modi vero nobis enim laudantium delectus cupiditate reiciendis illum id fuga beatae pariatur quo similique ea, eligendi corrupti sint est consectetur?</p>
+            {data!.results.map((film) => (
+                <FilmCard 
+                    key={film.id} film={film} 
+                />
+            ))}
         </React.Fragment>
     );
 };
