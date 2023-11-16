@@ -1,5 +1,6 @@
 import React from "react";
 import { MediaAPI } from "../global/MediaAPI";
+import { ActCard } from "../components/ActCard";
 
 export const Actors = () => {
     const { error, isLoading, data } = MediaAPI.useActQuery();
@@ -20,10 +21,10 @@ export const Actors = () => {
     return (
         <React.Fragment>
             <h1>Actors</h1>
-            {data!.results.map((actor) => (
-                <section key={actor.id}>
-                    <h1>{actor.name}</h1>
-                </section>
+            {data!.results.map((act) => (
+                <ActCard 
+                    key={act.id} act={act}
+                />
             ))}    
         </React.Fragment>
     );
