@@ -5,6 +5,7 @@ import { Navbar } from "./Navbar";
 import { NotFound } from "../components/NotFound";
 import { Films } from "../pages/Films";
 import { Actors } from "../pages/Actors";
+import { Info } from "../components/Info";
 
 const Router = createBrowserRouter([
     {
@@ -20,6 +21,11 @@ const Router = createBrowserRouter([
             {
                 path: "/actors",
                 element: <Actors />,
+                errorElement: <NotFound />
+            },
+            {
+                path: "/info/:id",
+                element: <Info />,
                 errorElement: <NotFound />
             }
         ]
